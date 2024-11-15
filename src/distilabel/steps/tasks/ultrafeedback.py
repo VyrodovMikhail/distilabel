@@ -193,6 +193,7 @@ class UltraFeedback(Task):
         "instruction-following",
         "truthfulness",
         # Custom aspects
+        "sociality",
         "overall-rating",
     ] = "overall-rating"
 
@@ -250,7 +251,7 @@ class UltraFeedback(Task):
     def outputs(self) -> List[str]:
         """The output for the task is the `generation` and the `model_name`."""
         columns = []
-        if self.aspect in ["honesty", "instruction-following", "overall-rating"]:
+        if self.aspect in ["honesty", "instruction-following", "sociality", "overall-rating"]:
             columns = ["ratings", "rationales"]
         elif self.aspect in ["helpfulness", "truthfulness"]:
             columns = ["types", "rationales", "ratings", "rationales-for-ratings"]
@@ -279,6 +280,7 @@ class UltraFeedback(Task):
         if self.aspect in [
             "honesty",
             "instruction-following",
+            "sociality",
             "overall-rating",
         ]:
             return self._format_ratings_rationales_output(output, input)
@@ -288,7 +290,7 @@ class UltraFeedback(Task):
     def _format_ratings_rationales_output(
         self, output: Union[str, None], input: Dict[str, Any]
     ) -> Dict[str, List[Any]]:
-        """Formats the output when the aspect is either `honesty`, `instruction-following`, or `overall-rating`."""
+        """Formats the output when the aspect is either `honesty`, `instruction-following`, `sociality`, or `overall-rating`."""
         if output is None:
             return {
                 "ratings": [None] * len(input["generations"]),
@@ -403,6 +405,7 @@ class UltraFeedback(Task):
         if self.aspect in [
             "honesty",
             "instruction-following",
+            "sociality",
             "overall-rating",
         ]:
             return {
@@ -468,6 +471,7 @@ class UltraFeedback(Task):
             if self.aspect in [
                 "honesty",
                 "instruction-following",
+                "sociality",
                 "overall-rating",
             ]:
                 return {

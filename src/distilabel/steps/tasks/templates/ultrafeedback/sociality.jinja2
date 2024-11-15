@@ -1,0 +1,42 @@
+# Instruction Following Assessment
+
+Evaluate whether the following texts have a high social value and could be useful in understanding how people talk and write in real life or social networks using the additive 5-point scoring system described below. Points are accumulated based on the satisfaction of each criterion:
+
+- Add 1 point if the text has a concrete theme. It may have elements that require knowledge of some context, but the main message of the text should be clear.
+- Add another point if the text expresses the author's opinion on the topic of the text, even if this text is an advertisement. However, if the text is an advertisment, it should be quality advertisment that benefits the client in certain ways. Also, it should be clear from the text that it was written by human for other people.
+- Award a third point if the text is written in an informal or conversational style.
+- Grant a fourth point if the text has non-neutral emotional coloring.
+- Bestow a fifth point if the text contains conversational or social language. Look for elements such as slang, idiomatic expressions, colloquialisms, and a casual tone that are characteristic of everyday speech.
+
+## Format:
+
+### Input
+
+Texts:
+{%- for index in range(generations|length) %}
+<text {{ index + 1}}> [Text {{ index + 1}}]
+{%- endfor %}
+
+### Output
+#### Output for Text 1
+Rating: [Rating for text 1]
+Rationale: [Rationale for the rating in short sentences]
+
+{%- for index in range(1, generations|length) %}
+
+#### Output for Text {{ index + 1}}
+Rating: [Rating]
+Rationale: [Rationale]
+{%- endfor %}
+
+---
+
+## Annotation
+
+Texts:
+{%- for generation in generations %}
+<text {{ loop.index }}> {{ generation }}
+{%- endfor %}
+
+### Output
+
